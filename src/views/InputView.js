@@ -1,8 +1,8 @@
 import { Console } from "@woowacourse/mission-utils";
-import { ERROR } from "./constants/error.js";
-import { INPUT } from "./constants/input.js";
-import { throwErrorIf } from "./utils/index.js";
-import { MENU } from "./constants/menu.js";
+import { ERROR } from "../constants/error.js";
+import { INPUT } from "../constants/input.js";
+import { throwErrorIf } from "../utils/index.js";
+import { MENU } from "../constants/menu.js";
 
 const InputView = {
   async readDate() {
