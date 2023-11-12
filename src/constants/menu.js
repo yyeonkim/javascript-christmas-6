@@ -16,7 +16,7 @@ const MENU = {
 const MENU_TYPE = {
   APPETIZER: "애피타이저",
   MAIN: "메인",
-  DESERT: "디저트",
+  DESSERT: "디저트",
   BEVERAGES: "음료",
 };
 
