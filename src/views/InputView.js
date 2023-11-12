@@ -24,7 +24,7 @@ const InputView = {
   async readOrder() {
     const input = await Console.readLineAsync(INPUT.ORDER);
 
-    // ["해산물파스타", 2] 형식의 메뉴가 담긴 배열을 반환
+    // {name:"해산물파스타", count: 2} 형식의 메뉴가 담긴 배열을 반환
     const orderArr = Array.from(input.split(","), (item) =>
       this.getMenuFrom(item)
     );
@@ -38,7 +38,7 @@ const InputView = {
     this.validateMenu(menu);
     const [name, count] = menu;
 
-    return [name.trim(), parseInt(count)];
+    return { name: name.trim(), count: parseInt(count) };
   },
 
   // value가 ["해산물파스타", "2"] 형식인지 확인
@@ -49,7 +49,7 @@ const InputView = {
   },
 
   validateOrder(value) {
-    const menuNames = value.map((item) => item[0]);
+    const menuNames = value.map((item) => item.name);
     const isDuplicated = new Set(menuNames).size !== menuNames.length;
     throwErrorIf(isDuplicated, ERROR.INVALID_ORDER);
   },

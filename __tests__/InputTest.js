@@ -45,8 +45,8 @@ describe("주문 입력 테스트", () => {
 
     const input = await InputView.readOrder();
     expect(input).toEqual([
-      ["해산물파스타", 2],
-      ["레드와인", 1],
+      { name: "해산물파스타", count: 2 },
+      { name: "레드와인", count: 1 },
     ]);
   });
 });
