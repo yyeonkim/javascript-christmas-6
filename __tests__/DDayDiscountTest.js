@@ -1,6 +1,6 @@
 import DDayDiscount from "../src/models/DDayDiscount.js";
 
-describe("디데인할인 객체 테스트", () => {
+describe("디데인 할인 테스트", () => {
   const cases = [
     [1, 1000],
     [25, 3400],
