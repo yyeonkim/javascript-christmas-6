@@ -1,4 +1,4 @@
-export const DAY = {
+const DAY = {
   MONDAY: "Monday",
   TUESDAY: "Tuesday",
   WEDNESDAY: "Wednesday",
@@ -7,3 +7,14 @@ export const DAY = {
   SATURDAY: "Saturday",
   SUNDAY: "Sunday",
 };
+
+const day = [
+  DAY.SUNDAY,
+  DAY.MONDAY,
+  DAY.TUESDAY,
+  DAY.THURSDAY,
+  DAY.FRIDAY,
+  DAY.SATURDAY,
+];
+
+export { DAY, day };
