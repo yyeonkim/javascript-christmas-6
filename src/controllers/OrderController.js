@@ -4,7 +4,7 @@ import Menu from "../models/Menu.js";
 import { throwErrorIf } from "../utils/index.js";
 
 class OrderController {
-  #order; // 각 메뉴의 {name, count}를 element로 가진 배열
+  #order = []; // 주문한 메뉴의 {name, count}를 element로 가진 배열
 
   constructor(order) {
     this.#validate(order);
@@ -12,16 +12,15 @@ class OrderController {
   }
 
   #validate(order) {
-    const onlyBeverages = this.countMenu(MENU_TYPE.BEVERAGES) === order.length;
-    throwErrorIf(order.length > 20 || onlyBeverages, ERROR.INVALID_ORDER);
-  }
-
-  computePrice() {
-    const price = this.#order.reduce((acc, item) => {
-      acc + new Menu(item.name).computePrice(item.count);
+    const beveragesCount = order.reduce((acc, item) => {
+      if (new Menu(item.name).getType() === MENU_TYPE.BEVERAGES) return ++acc;
+      return acc;
     }, 0);
+    const onlyBeverages = beveragesCount === order.length;
+    const menuCount = order.reduce((acc, item) => acc + item.count, 0);
 
-    return price;
+    throwErrorIf(menuCount > 20, ERROR.TOO_MANY_MENU_ORDERED);
+    throwErrorIf(onlyBeverages, ERROR.NOT_ONLY_BEVERAGES);
   }
 
   countMenu(type) {
@@ -32,6 +31,15 @@ class OrderController {
     });
 
     return count;
+  }
+
+  computePrice() {
+    const price = this.#order.reduce(
+      (acc, item) => acc + new Menu(item.name).computePrice(item.count),
+      0
+    );
+
+    return price;
   }
 }
 
