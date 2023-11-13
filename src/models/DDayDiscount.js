@@ -4,7 +4,7 @@ const DDayDiscount = {
 
   giveIf(date) {
     if (date <= 25) {
-      return start + count * (date - 1);
+      return this.start + this.count * (date - 1);
     }
     return 0;
   },
