@@ -1,4 +1,4 @@
-import { DAY } from "../src/constants/day.js";
+import { DAY } from "../src/constants/date.js";
 import WeekendDiscount from "../src/models/WeekendDiscount.js";
 
 describe("주말 할인 테스트", () => {

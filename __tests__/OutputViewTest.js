@@ -1,8 +1,8 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
 import { MENU } from "../src/constants/menu";
-import OutputView from "../src/views/OutputView";
 import { OUTPUT } from "../src/constants/output";
-import { BADGE } from "../src/constants/badge";
+import { BADGE } from "../src/constants/event.js";
+import OutputView from "../src/views/OutputView";
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, "print");
