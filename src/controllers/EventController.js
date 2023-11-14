@@ -4,13 +4,12 @@ import Giveaways from "../models/Giveaways.js";
 import WeekendDiscount from "../models/WeekendDiscount.js";
 import SpecialDiscount from "../models/SpecialDiscount.js";
 import { MENU_TYPE } from "../constants/menu.js";
-import { day } from "../constants/date.js";
 import { EVENT } from "../constants/event.js";
 
 class EventController {
-  #date;
-  #price; // 총주문 금액
+  #orderPrice;
   #requiredPrice = 10000;
+  #date;
   // 유형별 주문한 메뉴 개수
   #menuCountPerType = {
     [MENU_TYPE.APPETIZER]: 0,
@@ -19,15 +18,15 @@ class EventController {
     [MENU_TYPE.BEVERAGES]: 0,
   };
 
-  constructor(date, price, menuCountPerType) {
+  constructor(date, orderPrice, menuCountPerType) {
     this.#date = date;
-    this.#price = price;
+    this.#orderPrice = orderPrice;
     this.#menuCountPerType = menuCountPerType;
   }
 
+  // 총혜택 금액을 계산한다.
   computeTotal() {
-    if (this.#price >= this.#requiredPrice) {
-      // 이벤트 적용
+    if (this.#orderPrice >= this.#requiredPrice) {
       const discount = this.computeEach();
       const total = Object.values(discount).reduce(
         (acc, current) => acc + current,
@@ -36,29 +35,35 @@ class EventController {
 
       return total;
     }
-
     return 0;
   }
 
+  // 이벤트별 혜택 내역을 계산한다.
   computeEach() {
-    const dessertCount = this.#menuCountPerType[MENU_TYPE.DESSERT];
-    const mainCount = this.#menuCountPerType[MENU_TYPE.MAIN];
-    const day = this.getDay(this.#date);
-    const { price, count } = Giveaways.giveBy(this.#price);
-
     return {
-      [EVENT.D_DAY_DISCOUNT]: DDayDiscount.giveIf(this.#date),
-      [EVENT.WEEKDAY_DISCOUNT]: WeekdayDiscount.giveIf(dessertCount, day),
-      [EVENT.WEEKEND_DISCOUNT]: WeekendDiscount.giveIf(mainCount, day),
-      [EVENT.GIVEAWAYS_EVENT]: price * count,
-      [EVENT.SPECIAL_DISCOUNT]: SpecialDiscount.giveIf(this.#date),
+      [EVENT.D_DAY_DISCOUNT]: this.#computeDDay(),
+      [EVENT.WEEKDAY_DISCOUNT]: this.#computeWeekday(),
+      [EVENT.WEEKEND_DISCOUNT]: this.#computeWeekend(),
+      [EVENT.GIVEAWAYS_EVENT]: this.#computeGiveaways(),
+      [EVENT.SPECIAL_DISCOUNT]: this.#computeSpecial(),
     };
   }
 
-  getDay() {
-    const index = new Date(`2023-12-${this.#date}`).getDay();
-
-    return day[index];
+  #computeDDay() {
+    return DDayDiscount.giveIf(this.#date);
+  }
+  #computeWeekday() {
+    return WeekdayDiscount.giveIf(this.#date, this.#menuCountPerType);
+  }
+  #computeWeekend() {
+    return WeekendDiscount.giveIf(this.#date, this.#menuCountPerType);
+  }
+  #computeGiveaways() {
+    const { price, count } = Giveaways.giveIf(this.#orderPrice);
+    return price * count;
+  }
+  #computeSpecial() {
+    return SpecialDiscount.giveIf(this.#date);
   }
 }
 
