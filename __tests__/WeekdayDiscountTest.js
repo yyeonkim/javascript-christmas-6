@@ -1,30 +1,27 @@
-import { DAY } from "../src/constants/date.js";
+import { MENU_TYPE } from "../src/constants/menu.js";
 import WeekdayDiscount from "../src/models/WeekdayDiscount.js";
 
 describe("평일 할인 테스트", () => {
-  const applied = [
-    [2, DAY.SUNDAY, 4046],
-    [1, DAY.MONDAY, 2023],
-    [0, DAY.TUESDAY, 0],
-    [3, DAY.THURSDAY, 6069],
-  ];
+  const menuCountPerType = {
+    [MENU_TYPE.APPETIZER]: 1,
+    [MENU_TYPE.MAIN]: 2,
+    [MENU_TYPE.DESSERT]: 1,
+    [MENU_TYPE.BEVERAGES]: 1,
+  };
 
-  test.each(applied)(
-    "일요일부터 목요일까지 평일 할인이 적용된다.",
-    (dessertCount, day, discount) => {
-      expect(WeekdayDiscount.giveIf(dessertCount, day)).toEqual(discount);
-    }
-  );
+  test("일요일부터 목요일까지 평일 할인이 적용된다.", () => {
+    const dates = [3, 4, 5, 6, 7];
 
-  const notApplied = [
-    [2, DAY.FRIDAY, 0],
-    [3, DAY.SATURDAY, 0],
-  ];
+    dates.forEach((date) => {
+      expect(WeekdayDiscount.giveIf(date, menuCountPerType)).toEqual(2023);
+    });
+  });
 
-  test.each(notApplied)(
-    "금요일과 토요일에는 평일 할인이 적용되지 않는다.",
-    (dessertCount, day, discount) => {
-      expect(WeekdayDiscount.giveIf(dessertCount, day)).toEqual(discount);
-    }
-  );
+  test("금요일과 토요일에는 평일 할인이 적용되지 않는다.", () => {
+    const dates = [8, 9];
+
+    dates.forEach((date) => {
+      expect(WeekdayDiscount.giveIf(date, menuCountPerType)).toEqual(0);
+    });
+  });
 });
