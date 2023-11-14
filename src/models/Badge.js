@@ -9,7 +9,7 @@ const Badge = {
   },
 
   // 총혜택 금액에 따라 배지룰 부여한다.
-  grant(totalDiscount) {
+  grantBy(totalDiscount) {
     for (const [badge, discount] of Object.entries(this.requiredDiscount)) {
       if (totalDiscount >= discount) return badge;
     }

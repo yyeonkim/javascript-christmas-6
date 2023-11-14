@@ -9,6 +9,6 @@ describe("배지 테스트", () => {
   ];
 
   test.each(cases)("총혜택 금액에 따라 배지를 부여한다.", (discount, badge) => {
-    expect(Badge.grant(discount)).toEqual(badge);
+    expect(Badge.grantBy(discount)).toEqual(badge);
   });
 });

@@ -9,7 +9,7 @@ describe("특별 할인 테스트", () => {
   test.each(applied)(
     "크리스마스와 일요일에는 특별 할인이 적용된다.",
     (date, discount) => {
-      expect(SpecialDiscount.giveBasedOn(date)).toEqual(discount);
+      expect(SpecialDiscount.giveIf(date)).toEqual(discount);
     }
   );
 
@@ -21,7 +21,7 @@ describe("특별 할인 테스트", () => {
   test.each(notApplied)(
     "크리스마스가 아니거나 일요일이 아닌 날에는 특별 할인이 적용되지 않는다. ",
     (date, discount) => {
-      expect(SpecialDiscount.giveBasedOn(date)).toEqual(discount);
+      expect(SpecialDiscount.giveIf(date)).toEqual(discount);
     }
   );
 });

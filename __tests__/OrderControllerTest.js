@@ -29,10 +29,16 @@ describe("주문 클래스 테스트", () => {
     expect(price).toEqual(123000);
   });
 
-  test("특정 유형의 메뉴 개수를 알려준다.", () => {
-    const count = orderController.countMenu(MENU_TYPE.MAIN);
+  test("주문한 메뉴의 개수를 유형별로 알려준다.", () => {
+    const count = orderController.countMenuPerType();
+    const expectCount = {
+      [MENU_TYPE.APPETIZER]: 1,
+      [MENU_TYPE.MAIN]: 2,
+      [MENU_TYPE.DESSERT]: 0,
+      [MENU_TYPE.BEVERAGES]: 1,
+    };
 
-    expect(count).toEqual(2);
+    expect(count).toEqual(expectCount);
   });
 });
 

@@ -1,3 +1,4 @@
+import { EOL as LINE_SEPARATOR } from "os";
 import { Console } from "@woowacourse/mission-utils";
 import { ERROR } from "../constants/error.js";
 import { INPUT } from "../constants/input.js";
@@ -6,7 +7,7 @@ import { MENU } from "../constants/menu.js";
 
 const InputView = {
   async readDate() {
-    const input = await Console.readLineAsync(INPUT.DATE);
+    const input = await Console.readLineAsync(INPUT.DATE + LINE_SEPARATOR);
     this.validateDate(input);
 
     return parseInt(input);
@@ -21,10 +22,12 @@ const InputView = {
     throwErrorIf(isNotValidDate, ERROR.INVALID_DATE);
   },
 
+  /**
+   * @returns {Object[]} - 주문 메뉴의 이름과 개수가 저장된 obj 배열
+   */
   async readOrder() {
-    const input = await Console.readLineAsync(INPUT.ORDER);
+    const input = await Console.readLineAsync(INPUT.ORDER + LINE_SEPARATOR);
 
-    // {name:"해산물파스타", count: 2} 형식의 메뉴가 담긴 배열을 반환
     const orderArr = Array.from(input.split(","), (item) =>
       this.getMenuFrom(item)
     );

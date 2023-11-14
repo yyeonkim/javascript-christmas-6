@@ -10,7 +10,7 @@ describe("주말 할인 테스트", () => {
   test.each(applied)(
     "금요일과 토요일에는 주말 할인이 적용된다.",
     (mainCount, day, discount) => {
-      expect(WeekendDiscount.giveBasedOn(mainCount, day)).toEqual(discount);
+      expect(WeekendDiscount.giveIf(mainCount, day)).toEqual(discount);
     }
   );
 
@@ -25,7 +25,7 @@ describe("주말 할인 테스트", () => {
   test.each(notApplied)(
     "금요일이나 토요일이 아니면 주말 할인이 적용되지 않는다.",
     (mainCount, day, discount) => {
-      expect(WeekendDiscount.giveBasedOn(3, DAY.MONDAY)).toEqual(0);
+      expect(WeekendDiscount.giveIf(3, DAY.MONDAY)).toEqual(0);
     }
   );
 });

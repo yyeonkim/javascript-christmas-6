@@ -23,11 +23,17 @@ class OrderController {
     throwErrorIf(onlyBeverages, ERROR.NOT_ONLY_BEVERAGES);
   }
 
-  countMenu(type) {
-    let count = 0;
+  countMenuPerType() {
+    let count = {
+      [MENU_TYPE.APPETIZER]: 0,
+      [MENU_TYPE.MAIN]: 0,
+      [MENU_TYPE.DESSERT]: 0,
+      [MENU_TYPE.BEVERAGES]: 0,
+    };
 
     this.#order.forEach((item) => {
-      if (new Menu(item.name).getType() === type) count++;
+      const key = new Menu(item.name).getType();
+      count[key]++;
     });
 
     return count;

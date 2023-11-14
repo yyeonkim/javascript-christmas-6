@@ -28,7 +28,7 @@ const OutputView = {
     Console.print(str);
   },
 
-  printPriceBeforeDiscount(price) {
+  printOrderPrice(price) {
     Console.print(OUTPUT.PRICE_BEFORE_DISCOUNT);
 
     const formatted = Intl.NumberFormat().format(price);
@@ -86,7 +86,7 @@ const OutputView = {
   },
 
   /* 할인 후 예상 결제 금액 출력 */
-  printFinalPrice(price) {
+  printPaymentPrice(price) {
     Console.print(OUTPUT.FINAL_PRICE);
 
     const formatted = Intl.NumberFormat().format(price);

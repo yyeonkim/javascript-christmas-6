@@ -25,7 +25,7 @@ class EventController {
     this.#menuCountPerType = menuCountPerType;
   }
 
-  computeTotalDiscount() {
+  computeTotal() {
     if (this.#price >= this.#requiredPrice) {
       // 이벤트 적용
       const discount = this.computeEach();
@@ -44,14 +44,14 @@ class EventController {
     const dessertCount = this.#menuCountPerType[MENU_TYPE.DESSERT];
     const mainCount = this.#menuCountPerType[MENU_TYPE.MAIN];
     const day = this.getDay(this.#date);
-    const { price, count } = Giveaways.giveBasedOn(this.#price);
+    const { price, count } = Giveaways.giveBy(this.#price);
 
     return {
       [EVENT.D_DAY_DISCOUNT]: DDayDiscount.giveIf(this.#date),
-      [EVENT.WEEKDAY_DISCOUNT]: WeekdayDiscount.giveBasedOn(dessertCount, day),
-      [EVENT.WEEKEND_DISCOUNT]: WeekendDiscount.giveBasedOn(mainCount, day),
+      [EVENT.WEEKDAY_DISCOUNT]: WeekdayDiscount.giveIf(dessertCount, day),
+      [EVENT.WEEKEND_DISCOUNT]: WeekendDiscount.giveIf(mainCount, day),
       [EVENT.GIVEAWAYS_EVENT]: price * count,
-      [EVENT.SPECIAL_DISCOUNT]: SpecialDiscount.giveBasedOn(this.#date),
+      [EVENT.SPECIAL_DISCOUNT]: SpecialDiscount.giveIf(this.#date),
     };
   }
 

@@ -28,6 +28,6 @@ describe("이벤트 클래스 테스트", () => {
   });
 
   test("총 혜택 금액을 계산한다.", () => {
-    expect(event.computeTotalDiscount()).toEqual(31423);
+    expect(event.computeTotal()).toEqual(31423);
   });
 });

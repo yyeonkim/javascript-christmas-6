@@ -39,7 +39,7 @@ describe("출력 테스트", () => {
   });
 
   test("할인 전 총주문 금액을 출력한다.", () => {
-    OutputView.printPriceBeforeDiscount(12000);
+    OutputView.printOrderPrice(12000);
 
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("12,000원"));
   });
@@ -115,7 +115,7 @@ describe("출력 테스트", () => {
   });
 
   test("할인 후 예상 결제 금액을 출력한다.", () => {
-    OutputView.printFinalPrice(135754);
+    OutputView.printPaymentPrice(135754);
     expect(logSpy).toHaveBeenCalledWith(expect.stringContaining("135,754원"));
   });
 

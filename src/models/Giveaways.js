@@ -10,7 +10,7 @@ const Giveaways = {
   requiredPrice: 120000,
 
   // 총주문 금액에 따라 증정품을 준다.
-  giveBasedOn(price) {
+  giveBy(price) {
     let gift = { name: OUTPUT.NOTHING, price: 0, count: 0 };
 
     if (price >= this.requiredPrice) {
