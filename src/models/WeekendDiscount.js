@@ -1,11 +1,13 @@
-import { DAY } from "../constants/date.js";
+import { MENU_TYPE } from "../constants/menu.js";
+import Duration from "./Duration.js";
 
 const WeekendDiscount = {
   amount: 2023,
+  menuType: MENU_TYPE.MAIN,
 
-  giveIf(mainCount, day) {
-    if (day === DAY.FRIDAY || day === DAY.SATURDAY) {
-      return mainCount * this.amount;
+  giveIf(date, menuCountPerType) {
+    if (new Duration(date).isWeekend()) {
+      return menuCountPerType[this.menuType] * this.amount;
     }
     return 0;
   },
