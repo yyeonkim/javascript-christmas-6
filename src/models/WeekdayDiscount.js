@@ -1,4 +1,4 @@
-import { DAY } from "../constants/day.js";
+import { DAY } from "../constants/date.js";
 
 const WeekdayDiscount = {
   amount: 2023,

@@ -1,4 +1,4 @@
-import { BADGE } from "../src/constants/badge.js";
+import { BADGE } from "../src/constants/event.js";
 import Badge from "../src/models/Badge.js";
 
 describe("배지 테스트", () => {
