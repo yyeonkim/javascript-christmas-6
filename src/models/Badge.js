@@ -1,4 +1,5 @@
-import { BADGE } from "../constants/badge.js";
+import { BADGE } from "../constants/event.js";
+import { OUTPUT } from "../constants/output.js";
 
 const Badge = {
   requiredDiscount: {
@@ -12,6 +13,7 @@ const Badge = {
     for (const [badge, discount] of Object.entries(this.requiredDiscount)) {
       if (totalDiscount >= discount) return badge;
     }
+    return OUTPUT.NOTHING;
   },
 };
 
