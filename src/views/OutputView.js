@@ -3,8 +3,12 @@ import { EOL as LINE_SEPARATOR } from "os";
 import { OUTPUT } from "../constants/output";
 
 const OutputView = {
+  printIntro() {
+    Console.print(OUTPUT.INTRO);
+  },
+
   printPreview() {
-    Console.print(OUTPUT.TITLE + LINE_SEPARATOR);
+    Console.print(OUTPUT.PREVIEW + LINE_SEPARATOR);
   },
 
   /**
