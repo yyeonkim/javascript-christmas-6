@@ -26,7 +26,9 @@ const OutputView = {
 
   printPriceBeforeDiscount(price) {
     Console.print(OUTPUT.PRICE_BEFORE_DISCOUNT);
-    Console.print(`${price}원` + LINE_SEPARATOR);
+
+    const formatted = Intl.NumberFormat().format(price);
+    Console.print(`${formatted}원` + LINE_SEPARATOR);
   },
 
   /**
@@ -61,18 +63,20 @@ const OutputView = {
 
     let str = "";
     for (const [key, value] of Object.entries(event)) {
-      if (value !== 0) str += `${key}: -${value}원` + LINE_SEPARATOR;
+      const formatted = Intl.NumberFormat().format(value);
+      if (value !== 0) str += `${key}: -${formatted}원` + LINE_SEPARATOR;
     }
 
     if (str.length === 0) str = OUTPUT.NOTHING;
     Console.print(str);
   },
 
-  printTotalDiscount(price) {
+  printTotalDiscount(discount) {
     Console.print(OUTPUT.TOTLA_DISCOUNT);
 
     let str = "0원";
-    if (price !== 0) str = `-${price}원`;
+    const formatted = Intl.NumberFormat().format(discount);
+    if (discount !== 0) str = `-${formatted}원`;
 
     Console.print(str + LINE_SEPARATOR);
   },
@@ -80,7 +84,9 @@ const OutputView = {
   /* 할인 후 예상 결제 금액 출력 */
   printFinalPrice(price) {
     Console.print(OUTPUT.FINAL_PRICE);
-    Console.print(`${price}원` + LINE_SEPARATOR);
+
+    const formatted = Intl.NumberFormat().format(price);
+    Console.print(`${formatted}원` + LINE_SEPARATOR);
   },
 
   printBadge(badge) {
