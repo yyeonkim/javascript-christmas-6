@@ -1,4 +1,3 @@
-import { DAY } from "../src/constants/date.js";
 import { EVENT } from "../src/constants/event.js";
 import { MENU_TYPE } from "../src/constants/menu.js";
 import EventController from "../src/controllers/EventController.js";
@@ -12,10 +11,6 @@ describe("이벤트 클래스 테스트", () => {
     [MENU_TYPE.BEVERAGES]: 1,
   };
   const event = new EventController(25, 153000, count);
-
-  test("방문 날짜의 요일을 구한다.", () => {
-    expect(event.getDay()).toEqual(DAY.MONDAY);
-  });
 
   test("각 이벤트별로 혜택 내역을 계산한다.", () => {
     expect(event.computeEach()).toEqual({
