@@ -15,7 +15,7 @@ class App {
     const { order, orderController } = await this.receiveOrder();
     const menuCountPerType = orderController.countMenuPerType();
     const orderPrice = orderController.computePrice();
-    const { name, count } = Giveaways.giveBy(orderPrice);
+    const { name, count } = Giveaways.giveIf(orderPrice);
     const eventController = new EventController(
       date,
       orderPrice,
