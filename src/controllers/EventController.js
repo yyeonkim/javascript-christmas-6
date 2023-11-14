@@ -1,10 +1,11 @@
 import DDayDiscount from "../models/DDayDiscount.js";
 import WeekdayDiscount from "../models/WeekdayDiscount.js";
-import { MENU_TYPE } from "../constants/menu.js";
-import { day } from "../constants/day.js";
 import Giveaways from "../models/Giveaways.js";
 import WeekendDiscount from "../models/WeekendDiscount.js";
 import SpecialDiscount from "../models/SpecialDiscount.js";
+import { MENU_TYPE } from "../constants/menu.js";
+import { day } from "../constants/date.js";
+import { EVENT } from "../constants/event.js";
 
 class EventController {
   #date;
@@ -46,11 +47,11 @@ class EventController {
     const { price, count } = Giveaways.giveBasedOn(this.#price);
 
     return {
-      dDay: DDayDiscount.giveIf(this.#date),
-      weekday: WeekdayDiscount.giveBasedOn(dessertCount, day),
-      weekend: WeekendDiscount.giveBasedOn(mainCount, day),
-      giveaways: price * count,
-      special: SpecialDiscount.giveBasedOn(this.#date),
+      [EVENT.D_DAY_DISCOUNT]: DDayDiscount.giveIf(this.#date),
+      [EVENT.WEEKDAY_DISCOUNT]: WeekdayDiscount.giveBasedOn(dessertCount, day),
+      [EVENT.WEEKEND_DISCOUNT]: WeekendDiscount.giveBasedOn(mainCount, day),
+      [EVENT.GIVEAWAYS_EVENT]: price * count,
+      [EVENT.SPECIAL_DISCOUNT]: SpecialDiscount.giveBasedOn(this.#date),
     };
   }
 

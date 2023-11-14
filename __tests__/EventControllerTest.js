@@ -1,4 +1,5 @@
-import { DAY } from "../src/constants/day.js";
+import { DAY } from "../src/constants/date.js";
+import { EVENT } from "../src/constants/event.js";
 import { MENU_TYPE } from "../src/constants/menu.js";
 import EventController from "../src/controllers/EventController.js";
 
@@ -18,11 +19,11 @@ describe("이벤트 클래스 테스트", () => {
 
   test("각 이벤트별로 혜택 내역을 계산한다.", () => {
     expect(event.computeEach()).toEqual({
-      dDay: 3400,
-      weekday: 2023,
-      weekend: 0,
-      giveaways: 25000,
-      special: 1000,
+      [EVENT.D_DAY_DISCOUNT]: 3400,
+      [EVENT.WEEKDAY_DISCOUNT]: 2023,
+      [EVENT.WEEKEND_DISCOUNT]: 0,
+      [EVENT.GIVEAWAYS_EVENT]: 25000,
+      [EVENT.SPECIAL_DISCOUNT]: 1000,
     });
   });
 
