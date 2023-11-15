@@ -1,6 +1,6 @@
 import { Console } from "@woowacourse/mission-utils";
 import { EOL as LINE_SEPARATOR } from "os";
-import { OUTPUT } from "../constants/output";
+import { OUTPUT } from "../constants/output.js";
 
 const OutputView = Object.freeze({
   printIntro() {
