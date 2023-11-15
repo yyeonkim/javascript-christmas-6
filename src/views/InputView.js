@@ -23,11 +23,10 @@ const InputView = Object.freeze({
   },
 
   /**
-   * @returns {Object[]} - 주문 메뉴의 이름과 개수가 저장된 obj 배열
+   * @returns {Object[]} - 주문 메뉴의 정보를 담은 배열
    */
   async readOrder() {
     const input = await Console.readLineAsync(INPUT.ORDER + LINE_SEPARATOR);
-
     const orderArr = Array.from(input.split(","), (item) =>
       this.getMenuFrom(item)
     );
@@ -36,6 +35,9 @@ const InputView = Object.freeze({
     return orderArr;
   },
 
+  /**
+   * @returns {Object} - 주문 메뉴의 이름과 개수
+   */
   getMenuFrom(value) {
     const menu = value.split("-");
     this.validateMenu(menu);
