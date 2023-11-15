@@ -1,7 +1,7 @@
 import { BADGE } from "../constants/event.js";
 import { OUTPUT } from "../constants/output.js";
 
-const Badge = {
+const Badge = Object.freeze({
   requiredDiscount: {
     [BADGE.SANTA]: 20000,
     [BADGE.TREE]: 10000,
@@ -15,6 +15,6 @@ const Badge = {
     }
     return OUTPUT.NOTHING;
   },
-};
+});
 
 export default Badge;

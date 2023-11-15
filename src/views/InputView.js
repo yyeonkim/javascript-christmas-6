@@ -5,7 +5,7 @@ import { INPUT } from "../constants/input.js";
 import { throwErrorIf } from "../utils/index.js";
 import { MENU } from "../constants/menu.js";
 
-const InputView = {
+const InputView = Object.freeze({
   async readDate() {
     const input = await Console.readLineAsync(INPUT.DATE + LINE_SEPARATOR);
     this.validateDate(input);
@@ -56,6 +56,6 @@ const InputView = {
     const isDuplicated = new Set(menuNames).size !== menuNames.length;
     throwErrorIf(isDuplicated, ERROR.INVALID_ORDER);
   },
-};
+});
 
 export default InputView;

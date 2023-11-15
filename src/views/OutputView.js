@@ -2,7 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 import { EOL as LINE_SEPARATOR } from "os";
 import { OUTPUT } from "../constants/output";
 
-const OutputView = {
+const OutputView = Object.freeze({
   printIntro() {
     Console.print(OUTPUT.INTRO);
   },
@@ -97,6 +97,6 @@ const OutputView = {
     Console.print(OUTPUT.BADGE);
     Console.print(badge + LINE_SEPARATOR);
   },
-};
+});
 
 export default OutputView;

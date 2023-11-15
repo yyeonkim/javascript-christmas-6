@@ -1,7 +1,7 @@
 import { MENU } from "../constants/menu.js";
 import { OUTPUT } from "../constants/output.js";
 
-const Giveaways = {
+const Giveaways = Object.freeze({
   gift: {
     name: MENU.CHAMPAGNE,
     count: 1,
@@ -19,6 +19,6 @@ const Giveaways = {
 
     return gift;
   },
-};
+});
 
 export default Giveaways;

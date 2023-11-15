@@ -1,7 +1,7 @@
 import { MENU_TYPE } from "../constants/menu.js";
 import Duration from "./Duration.js";
 
-const WeekendDiscount = {
+const WeekendDiscount = Object.freeze({
   amount: 2023,
   menuType: MENU_TYPE.MAIN,
 
@@ -11,6 +11,6 @@ const WeekendDiscount = {
     }
     return 0;
   },
-};
+});
 
 export default WeekendDiscount;

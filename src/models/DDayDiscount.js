@@ -1,4 +1,4 @@
-const DDayDiscount = {
+const DDayDiscount = Object.freeze({
   count: 100,
   start: 1000,
 
@@ -8,6 +8,6 @@ const DDayDiscount = {
     }
     return 0;
   },
-};
+});
 
 export default DDayDiscount;
